@@ -1,11 +1,9 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	route "demo/route"
+)
 
 func main() {
-	app := gin.Default()
-	app.GET("/index", func(this *gin.Context) {
-		this.Writer.Write([]byte("helle gin"))
-	})
-	app.Run()
+	route.InitRouter()
 }
