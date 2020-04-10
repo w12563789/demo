@@ -5,18 +5,26 @@ import (
 	"net/http"
 )
 
+/*type msg struct {
+	username    string `json:"user"`
+	password    string
+	captcha     string
+}*/
+type Person struct {
+	Id        int    `json:"id" form:"id"`
+	Module string `json:"module" form:"module"`
+	Content  string `json:"content" form:"content"`
+}
 func Login(this *gin.Context)  {
-
-	if this.Request.Method == "POST" {
-		var msg struct {
-			Name    string `json:"user"`
-			Message string
-			Age     int
-		}
-		msg.Name = "小王子"
-		msg.Message = "Hello world!"
-		msg.Age = 18
-		this.JSON(http.StatusOK,msg)
-	}
-	this.HTML(http.StatusOK, "login/index.html",nil)
+	persons := make([]Person, 0)
+	var person Person
+	person.Id = 123
+	person.Module = "123"
+	person.Content = "123"
+	persons = append(persons, person)
+	this.JSON(http.StatusOK, gin.H{
+		"status" :200,
+		"error": nil,
+		"data": persons,
+	})
 }
